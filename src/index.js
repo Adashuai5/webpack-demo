@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import './index.less'
 
 function component() {
   const element = document.createElement('div')
@@ -9,3 +10,16 @@ function component() {
 }
 
 document.body.appendChild(component())
+
+//index.js
+class Animal {
+  constructor(name) {
+    this.name = name
+  }
+  getName() {
+    return this.name
+  }
+}
+
+const dog = new Animal('dog')
+console.log('aaa')

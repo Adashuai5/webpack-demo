@@ -1,6 +1,7 @@
 //webpack.config.js
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 const config = require('./public/config')[isDev ? 'dev' : 'build']
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -10,6 +11,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist/lib'), //必须是绝对路径
     // filename: 'bundle.[hash].js',
+    // library: '',
+    // libraryTarget: 'umd',
     publicPath: config.publicPath //通常是CDN地址
   },
   mode: isDev ? 'development' : 'production',
@@ -76,6 +79,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public/js/*.js', to: path.resolve(__dirname, 'dist', 'js') }]
+    }),
     //数组 放着所有的webpack插件
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -89,7 +95,7 @@ module.exports = {
     }),
     //不需要传参数喔，它可以找到 outputPath
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!dll', '!dll/**'] //不删除dll目录下的文件
+      cleanOnceBeforeBuildPatterns: [] //不删除dll目录下的文件
     })
   ],
   devServer: {

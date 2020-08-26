@@ -1,20 +1,16 @@
 import _ from "lodash";
-import "./style.css";
-import Shape from "./shape.png";
-import Data from "./data.xml";
+import printMe from "./print";
 
 function component() {
   const element = document.createElement("div");
 
-  // lodash，现在通过一个 script 引入
   element.innerHTML = _.join(["Hello", "webpack"], " ");
-  element.classList.add("hello");
+  const btn = document.createElement("button");
 
-  const pic = new Image();
-  pic.src = Shape;
-  element.appendChild(pic);
+  btn.innerHTML = "点击查看 log";
+  btn.onclick = printMe;
 
-  console.log(Data);
+  element.appendChild(btn);
 
   return element;
 }

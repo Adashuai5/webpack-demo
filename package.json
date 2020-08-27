@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   "homepage": "https://github.com/Adashuai5/webpack-demo#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.2.2",
     "csv-loader": "^3.0.3",
     "file-loader": "^6.0.0",
@@ -27,6 +30,7 @@
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
     "webpack-manifest-plugin": "^2.2.0",
     "xml-loader": "^1.2.1"
   },

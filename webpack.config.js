@@ -8,11 +8,7 @@ module.exports = {
   mode: isDev ? "development" : "production",
   entry: {
     index: "./src/index.js",
-  },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
+    another: "./src/another-module.js",
   },
   devtool: "cheap-module-eval-source-map",
   devServer: {
@@ -37,14 +33,27 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackHtml({
-      title: "开发环境",
+      title: "Caching",
     }),
     new CleanWebpackPlugin(),
     new ManifestPlugin(),
   ],
   output: {
-    filename: "[name].bundle.[hash].js",
-    chunkFilename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
+  },
+  optimization: {
+    moduleIds: "hashed",
+    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vender: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "venders",
+          chunks: "all",
+        },
+      },
+    },
   },
 };

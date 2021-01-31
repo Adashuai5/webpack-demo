@@ -7,18 +7,17 @@ import traverse from "@babel/traverse";
 import { readFileSync } from "fs";
 import { resolve, relative, dirname } from "path";
 
-const rootPath = resolve(__dirname, "project_1");
+const rootPath = resolve(__dirname, "project_2");
 type DepRelation = { [key: string]: { deps: string[]; code: string } };
 const depRelation: DepRelation = {};
-
-const index = resolve(rootPath, "index.js");
-const code = readFileSync(index).toString();
 
 const getRelativePath = (fileName: string) => {
   return relative(rootPath, fileName);
 };
 
 const getDepRelation = (fileName: string) => {
+  const filePath = resolve(rootPath, fileName);
+  const code = readFileSync(filePath).toString();
   const ast = parse(code, { sourceType: "module" });
   const key = getRelativePath(fileName);
   depRelation[key] = { deps: [], code };
@@ -26,14 +25,15 @@ const getDepRelation = (fileName: string) => {
   traverse(ast, {
     enter: (item) => {
       if (item.node.type === "ImportDeclaration") {
-        const importDep = resolve(dirname(index), item.node.source.value);
+        const importDep = resolve(dirname(filePath), item.node.source.value);
 
         depRelation[key].deps.push(getRelativePath(importDep));
+        getDepRelation(importDep);
       }
     },
   });
 };
 
-getDepRelation(index);
+getDepRelation('index.js');
 
 console.log("depRelation", depRelation);

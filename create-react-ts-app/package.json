@@ -12,6 +12,11 @@
     "build-prod": "webpack --mode production",
     "start": "webpack serve --hot --mode development"
   },
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
+  },
   "dependencies": {
     "@types/react-hot-loader": "^4.1.1",
     "react": "^17.0.1",
@@ -33,6 +38,7 @@
     "node-sass": "^5.0.0",
     "prettier": "^2.2.1",
     "sass-loader": "^10.1.1",
+    "standard": "^16.0.3",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.14",
     "typescript": "^4.1.3",

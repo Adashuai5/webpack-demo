@@ -1,11 +1,11 @@
-const webpack = require('webpack');
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
-  entry: [1
+  entry: [
     'react-hot-loader/patch',
     './src/index.tsx'
   ],
@@ -62,7 +62,7 @@ const config = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: 'src/index.html' }],
+      patterns: [{ from: 'src/index.html' }]
     }),
     new HtmlWebpackPlugin({
       appMountId: 'app',
@@ -70,6 +70,6 @@ const config = {
     }),
     new CleanWebpackPlugin()
   ]
-};
+}
 
-module.exports = config;
+module.exports = config

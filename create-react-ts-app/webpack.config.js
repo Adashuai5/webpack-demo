@@ -1,29 +1,25 @@
-const webpack = require('webpack')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.tsx'
-  ],
+  entry: ['react-hot-loader/patch', './src/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.png$/,
@@ -31,45 +27,36 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              mimetype: 'image/png'
-            }
-          }
-        ]
+              mimetype: 'image/png',
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.jsx',
-      '.tsx',
-      '.ts'
-    ],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: 'src/index.html' }]
+      patterns: [{ from: 'src/index.html' }],
     }),
     new HtmlWebpackPlugin({
       appMountId: 'app',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
-    new CleanWebpackPlugin()
-  ]
+    new CleanWebpackPlugin(),
+  ],
 }
 
 module.exports = config
